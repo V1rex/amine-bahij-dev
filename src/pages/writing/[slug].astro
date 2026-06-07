@@ -1,0 +1,223 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("writing");
+
+    return posts
+        .filter((post) => !post.data.draft)
+        .map((post) => ({
+            params: { slug: post.id },
+            props: { post },
+        }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout
+        title={`${post.data.title} · Amine Bahij`}
+        description={post.data.description}
+>
+    <Navbar />
+
+    <main>
+        <article class="article">
+            <header class="article-header">
+                <div class="container narrow">
+                    <a class="back-link" href="/writing">← Writing</a>
+
+                    <p class="article-date">
+                        {new Date(post.data.date).toLocaleDateString("en", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        })}
+                    </p>
+
+                    <h1>{post.data.title}</h1>
+                    <p class="description">{post.data.description}</p>
+
+                    <div class="tags">
+                        {post.data.tags.map((tag) => <span>{tag}</span>)}
+                    </div>
+                </div>
+            </header>
+
+            {post.data.coverImage && (
+                    <div class="container article-cover-wrap">
+                        <img
+                                class="article-cover"
+                                src={post.data.coverImage}
+                                alt={post.data.coverAlt ?? ""}
+                        />
+                    </div>
+            )}
+
+            <div class="container narrow article-body">
+                <Content />
+            </div>
+        </article>
+    </main>
+
+    <Footer />
+</BaseLayout>
+
+<style>
+    .article-header {
+        padding: 5.5rem 0 2.5rem;
+    }
+
+    .narrow {
+        max-width: 820px;
+    }
+
+    .back-link {
+        display: inline-flex;
+        margin-bottom: 2rem;
+        color: var(--text-muted);
+        font-weight: 700;
+    }
+
+    .back-link:hover {
+        color: var(--accent);
+    }
+
+    .article-date {
+        margin: 0 0 1rem;
+        color: var(--accent);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+        line-height: 1;
+        letter-spacing: -0.07em;
+    }
+
+    .description {
+        margin: 1.35rem 0 0;
+        color: var(--text-muted);
+        font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+        line-height: 1.55;
+        letter-spacing: -0.025em;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        margin-top: 1.4rem;
+    }
+
+    .tags span {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--surface-muted);
+        color: var(--text-muted);
+        padding: 0.35rem 0.65rem;
+        font-size: 0.78rem;
+        font-weight: 650;
+    }
+
+    .article-cover-wrap {
+        margin-bottom: 3rem;
+    }
+
+    .article-cover {
+        width: 100%;
+        max-height: 460px;
+        object-fit: cover;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        background: var(--surface-muted);
+        filter: saturate(0.9) contrast(1.03) brightness(0.98);
+    }
+
+    .article-body {
+        color: var(--text-muted);
+        font-size: 1.06rem;
+        line-height: 1.85;
+    }
+
+    .article-body :global(h2) {
+        margin: 2.6rem 0 0.8rem;
+        color: var(--text-main);
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        letter-spacing: -0.045em;
+    }
+
+    .article-body :global(h3) {
+        margin: 2rem 0 0.6rem;
+        color: var(--text-main);
+        font-size: 1.25rem;
+        letter-spacing: -0.03em;
+    }
+
+    .article-body :global(p) {
+        margin: 1rem 0 0;
+    }
+
+    .article-body :global(a) {
+        color: var(--accent);
+        font-weight: 700;
+    }
+
+    .article-body :global(ul),
+    .article-body :global(ol) {
+        padding-left: 1.25rem;
+    }
+
+    .article-body :global(li + li) {
+        margin-top: 0.4rem;
+    }
+
+    .article-body :global(img) {
+        width: 100%;
+        margin: 2rem 0;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        background: var(--surface-muted);
+        filter: saturate(0.9) contrast(1.03) brightness(0.98);
+    }
+
+    .article-body :global(blockquote) {
+        margin: 2rem 0;
+        border-left: 3px solid var(--accent);
+        padding-left: 1rem;
+        color: var(--text-main);
+        font-weight: 650;
+    }
+
+    .article-body :global(code) {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: var(--surface-muted);
+        padding: 0.12rem 0.3rem;
+        color: var(--text-main);
+        font-size: 0.92em;
+    }
+
+    .article-body :global(pre) {
+        overflow-x: auto;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        background: #020617;
+        padding: 1rem;
+    }
+
+    .article-body :global(pre code) {
+        border: 0;
+        background: transparent;
+        padding: 0;
+        color: #e5e7eb;
+    }
+</style>

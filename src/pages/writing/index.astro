@@ -1,0 +1,188 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("writing"))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<BaseLayout
+        title="Writing · Amine Bahij"
+        description="Writing by Amine Bahij — notes on backend systems, optimization, and applied software."
+>
+    <Navbar />
+
+    <main>
+        <section class="writing-hero">
+            <div class="container">
+                <p class="eyebrow">Writing</p>
+                <h1>Notes on software, systems, and applied optimization.</h1>
+
+                <p class="lead">
+                    Occasional technical notes about projects, backend engineering,
+                    optimization software, and what I learn while building.
+                </p>
+            </div>
+        </section>
+
+        <section class="section writing-list-section">
+            <div class="container">
+                <div class="post-grid">
+                    {posts.map((post) => (
+                            <a class="post-card card" href={`/writing/${post.id}`}>
+                                {post.data.coverImage && (
+                                        <div class="post-cover">
+                                            <img src={post.data.coverImage} alt={post.data.coverAlt ?? ""} />
+                                        </div>
+                                )}
+
+                                <div class="post-content">
+                                    <p class="post-date">
+                                        {new Date(post.data.date).toLocaleDateString("en", {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        })}
+                                    </p>
+
+                                    <h2>{post.data.title}</h2>
+                                    <p>{post.data.description}</p>
+
+                                    <div class="tags">
+                                        {post.data.tags.map((tag) => <span>{tag}</span>)}
+                                    </div>
+                                </div>
+                            </a>
+                    ))}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</BaseLayout>
+
+<style>
+    .writing-hero {
+        padding: 5.5rem 0 3.5rem;
+    }
+
+    .eyebrow {
+        margin: 0 0 1.25rem;
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    h1 {
+        margin: 0;
+        max-width: 900px;
+        font-size: clamp(2.7rem, 6vw, 5.2rem);
+        line-height: 0.98;
+        letter-spacing: -0.07em;
+    }
+
+    .lead {
+        margin: 1.5rem 0 0;
+        max-width: 720px;
+        color: var(--text-muted);
+        font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+        line-height: 1.5;
+        letter-spacing: -0.03em;
+    }
+
+    .writing-list-section {
+        padding-top: 2rem;
+    }
+
+    .post-grid {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    .post-card {
+        display: grid;
+        grid-template-columns: 260px minmax(0, 1fr);
+        overflow: hidden;
+        transition:
+                transform 160ms ease,
+                border-color 160ms ease,
+                box-shadow 160ms ease;
+    }
+
+    .post-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(37, 99, 235, 0.35);
+        box-shadow: 0 22px 55px rgba(15, 23, 42, 0.08);
+    }
+
+    .post-cover {
+        min-height: 220px;
+        background: var(--surface-muted);
+    }
+
+    .post-cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(0.9) contrast(1.03) brightness(0.98);
+    }
+
+    .post-content {
+        padding: 1.5rem;
+    }
+
+    .post-date {
+        margin: 0 0 0.7rem;
+        color: var(--accent);
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    h2 {
+        margin: 0;
+        color: var(--text-main);
+        font-size: clamp(1.35rem, 3vw, 2rem);
+        letter-spacing: -0.045em;
+    }
+
+    .post-content > p:not(.post-date) {
+        margin: 0.85rem 0 0;
+        color: var(--text-muted);
+        line-height: 1.75;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        margin-top: 1.2rem;
+    }
+
+    .tags span {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--surface-muted);
+        color: var(--text-muted);
+        padding: 0.35rem 0.65rem;
+        font-size: 0.78rem;
+        font-weight: 650;
+    }
+
+    @media (max-width: 820px) {
+        .post-card {
+            grid-template-columns: 1fr;
+        }
+
+        .post-cover {
+            min-height: 180px;
+        }
+    }
+</style>

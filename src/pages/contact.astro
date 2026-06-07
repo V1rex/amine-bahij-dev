@@ -1,0 +1,188 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout
+        title="Contact · Amine Bahij"
+        description="Contact Amine Bahij — backend systems, operations research, and applied optimization."
+>
+    <Navbar />
+
+    <main>
+        <section class="contact-hero">
+            <div class="container contact-grid">
+                <div>
+                    <p class="eyebrow">Contact</p>
+                    <h1>Reach out for technical or professional contact.</h1>
+
+                    <p class="lead">
+                        For technical questions, project feedback, or professional contact, the best ways to reach me are listed below.
+                    </p>
+                </div>
+
+                <aside class="contact-card card">
+                    <p class="section-kicker">Reach me</p>
+
+                    <div class="contact-links">
+                        <a href="mailto:medaminebahij02@gmail.com">
+                            <span>Email</span>
+                            <strong>medaminebahij02@gmail.com</strong>
+                        </a>
+
+                        <a href="https://github.com/V1rex">
+                            <span>GitHub</span>
+                            <strong>github.com/V1rex</strong>
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/mohamed-amine-amine/">
+                            <span>LinkedIn</span>
+                            <strong>linkedin.com/in/mohamed-amine-amine/</strong>
+                        </a>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+<!--        <section class="section compact-section">
+            <div class="container note card">
+                <p class="section-kicker">Best topics</p>
+                <h2>What I am most interested in</h2>
+
+                <div class="topics">
+                    <span>Backend engineering</span>
+                    <span>Spring Boot</span>
+                    <span>Operations research</span>
+                    <span>Optimization software</span>
+                    <span>Logistics systems</span>
+                    <span>Energy informatics</span>
+                </div>
+            </div>
+        </section>-->
+    </main>
+
+    <Footer />
+</BaseLayout>
+
+<style>
+    .contact-hero {
+        padding: 5.5rem 0 3.5rem;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 380px;
+        gap: 3rem;
+        align-items: start;
+    }
+
+    .eyebrow {
+        margin: 0 0 1.25rem;
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    h1 {
+        margin: 0;
+        max-width: 900px;
+        font-size: clamp(2.55rem, 5.6vw, 5rem);
+        line-height: 0.98;
+        letter-spacing: -0.07em;
+    }
+
+    .lead {
+        margin: 1.5rem 0 0;
+        max-width: 720px;
+        color: var(--text-muted);
+        font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+        line-height: 1.5;
+        letter-spacing: -0.03em;
+    }
+
+    .contact-card {
+        padding: 1.5rem;
+    }
+
+    .contact-links {
+        display: grid;
+        gap: 0.8rem;
+        margin-top: 1.2rem;
+    }
+
+    .contact-links a {
+        display: grid;
+        gap: 0.3rem;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        background: var(--surface-muted);
+        padding: 0.9rem 1rem;
+        transition:
+                border-color 160ms ease,
+                transform 160ms ease;
+    }
+
+    .contact-links a:hover {
+        transform: translateY(-2px);
+        border-color: rgba(37, 99, 235, 0.35);
+    }
+
+    .contact-links span {
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        font-weight: 750;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .contact-links strong {
+        color: var(--text-main);
+        font-size: 0.95rem;
+        word-break: break-word;
+    }
+
+    .compact-section {
+        padding-top: 2rem;
+    }
+
+    .note {
+        padding: 1.6rem;
+    }
+
+    .note h2 {
+        margin: 0;
+        color: var(--text-main);
+        font-size: clamp(1.45rem, 3vw, 2rem);
+        letter-spacing: -0.045em;
+    }
+
+    .topics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        margin-top: 1.25rem;
+    }
+
+    .topics span {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--surface-muted);
+        color: var(--text-muted);
+        padding: 0.4rem 0.7rem;
+        font-size: 0.82rem;
+        font-weight: 650;
+    }
+
+    @media (max-width: 900px) {
+        .contact-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .contact-card {
+            max-width: 460px;
+        }
+    }
+</style>

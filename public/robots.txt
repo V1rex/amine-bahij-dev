@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://amine-bahij.dev/sitemap-index.xml

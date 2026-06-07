@@ -2,18 +2,31 @@
 import "../styles/global.css";
 
 const {
-  title = "Amine Bahij",
-  description = "Backend systems, operations research, and optimization-driven software."
+  title = "Amine Bahij · Backend Systems, Operations Research, Applied Optimization",
+  description = "Personal website of Amine Bahij, a computer science student focused on backend systems, operations research, and applied optimization."
 } = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Amine Bahij" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>

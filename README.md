@@ -1,43 +1,46 @@
-# Astro Starter Kit: Minimal
+# amine-bahij.dev
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Personal website documenting my work around backend systems, operations research, and applied optimization.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Built with [Astro](https://astro.build/) and deployed with GitHub Pages.
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+  components/   Reusable UI components
+  content/      Markdown writing content
+  layouts/      Shared page layout
+  pages/        Website routes
+  public/         Static assets
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Local development 
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash 
+npm install
+npm run dev
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+The development server runs at: 
 
-## 🧞 Commands
+```aiignore
+http://localhost:4321
+```
 
-All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Build 
 
-## 👀 Want to learn more?
+```
+npm run build
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## Deployment 
+
+The site is deployed to: 
+```
+https://amine-bahij.dev
+```
+
+Deployment is handled through GitHub Actions and GitHub Pages.

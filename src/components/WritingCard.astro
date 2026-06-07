@@ -1,0 +1,65 @@
+---
+const {
+    title,
+    description,
+    href,
+} = Astro.props;
+---
+
+<a class="writing-card" href={href}>
+    <div>
+        <p class="label">Writing</p>
+        <h3>{title}</h3>
+        <p>{description}</p>
+    </div>
+
+    <span aria-hidden="true">→</span>
+</a>
+
+<style>
+    .writing-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        background: rgba(255, 255, 255, 0.72);
+        padding: 1.25rem 1.35rem;
+        transition:
+                border-color 160ms ease,
+                transform 160ms ease;
+    }
+
+    .writing-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(37, 99, 235, 0.35);
+    }
+
+    .label {
+        margin: 0 0 0.5rem;
+        color: var(--accent);
+        font-size: 0.74rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 1.05rem;
+        letter-spacing: -0.02em;
+    }
+
+    p {
+        margin: 0.45rem 0 0;
+        color: var(--text-muted);
+        line-height: 1.65;
+    }
+
+    span {
+        color: var(--accent);
+        font-size: 1.25rem;
+        font-weight: 800;
+    }
+</style>

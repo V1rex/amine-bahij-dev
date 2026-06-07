@@ -1,0 +1,48 @@
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <p>© {new Date().getFullYear()} Amine Bahij</p>
+
+        <div class="footer-links">
+            <a href="https://github.com/V1rex">GitHub</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .site-footer {
+        padding: 3rem 0 2rem;
+        color: var(--text-muted);
+    }
+
+    .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        border-top: 1px solid var(--border);
+        padding-top: 1.5rem;
+        font-size: 0.92rem;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .footer-links {
+        display: flex;
+        gap: 1rem;
+        font-weight: 650;
+    }
+
+    a:hover {
+        color: var(--accent);
+    }
+
+    @media (max-width: 620px) {
+        .footer-inner {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+</style>

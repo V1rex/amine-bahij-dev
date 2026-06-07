@@ -2,9 +2,93 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import WritingCard from "../components/WritingCard.astro";
+import FocusAreas from "../components/FocusAreas.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <BaseLayout>
   <Navbar />
   <Hero />
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker">Selected work</p>
+            <h2 class="section-title">Projects that connect models and systems</h2>
+          </div>
+
+          <a class="section-link" href="/projects">All projects →</a>
+        </div>
+
+        <ProjectCard
+            title="Lift Nexus API"
+            href="https://lift-nexus.amine-bahij.dev/"
+            logo="public/images/logo-lift-nexus.png"
+            logoAlt="Lift Nexus API logo"
+            description="A Spring Boot backend MVP for warehouse dispatch optimization, exploring how solver-based planning can be integrated into APIs, persistence, tests, documentation, and CI-generated reports."
+            tags={[
+              "Spring Boot",
+              "Timefold",
+              "PostgreSQL",
+              "Flyway",
+              "Docker",
+              "CI/CD",
+              "Testing"
+            ]}
+        />
+      </div>
+    </section>
+
+    <section class="section writing-section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker">Writing</p>
+            <h2 class="section-title">Notes on software and optimization</h2>
+          </div>
+
+          <a class="section-link" href="/writing">All writing →</a>
+        </div>
+
+        <div class="writing-grid">
+
+          <WritingCard
+              title="Why I am building Lift Nexus API"
+              href="/writing"
+              description="A short reflection on backend architecture, operations research, and learning to ship optimization-heavy software."
+          />
+        </div>
+      </div>
+    </section>
+
+    <FocusAreas />
+  </main>
+
+  <Footer />
 </BaseLayout>
+
+<style>
+  main {
+    padding-bottom: 1rem;
+  }
+
+  .writing-section {
+    padding-top: 2rem;
+  }
+
+  .writing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  @media (max-width: 820px) {
+    .writing-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

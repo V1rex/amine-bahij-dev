@@ -1,0 +1,129 @@
+---
+const {
+    title,
+    description,
+    href,
+    tags = [],
+    logo,
+    logoAlt = "",
+} = Astro.props;
+---
+
+<a class="project-card card" href={href}>
+    <div class="project-content">
+        <div>
+            <p class="label">Selected project</p>
+            <h3>{title}</h3>
+            <p class="description">{description}</p>
+        </div>
+
+        <div class="tags">
+            {tags.map((tag) => <span>{tag}</span>)}
+        </div>
+    </div>
+
+    {logo && (
+            <div class="logo-wrap">
+                <img src={logo} alt={logoAlt} />
+            </div>
+    )}
+</a>
+
+<style>
+    .project-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 2rem;
+        padding: 1.5rem 2rem;
+        transition:
+                transform 160ms ease,
+                border-color 160ms ease,
+                box-shadow 160ms ease;
+    }
+
+    .project-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(37, 99, 235, 0.35);
+        box-shadow: 0 22px 55px rgba(15, 23, 42, 0.08);
+    }
+
+    .project-content {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .label {
+        margin: 0 0 0.7rem;
+        color: var(--accent);
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 1.35rem;
+        letter-spacing: -0.03em;
+    }
+
+    .description {
+        max-width: 62ch;
+        margin: 0.8rem 0 0;
+        color: var(--text-muted);
+        line-height: 1.75;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+    }
+
+    .tags span {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--surface-muted);
+        color: var(--text-muted);
+        padding: 0.35rem 0.65rem;
+        font-size: 0.78rem;
+        font-weight: 650;
+    }
+
+    .logo-wrap {
+        display: grid;
+        place-items: center;
+        width: 132px;
+        height: 132px;
+        flex: 0 0 auto;
+        border: 1px solid var(--border);
+        border-radius: 26px;
+        background: var(--surface-muted);
+    }
+
+    .logo-wrap img {
+        width: 96px;
+        height: 96px;
+        object-fit: contain;
+    }
+
+    @media (max-width: 760px) {
+        .project-card {
+            grid-template-columns: 1fr;
+            padding: 1.5rem;
+        }
+
+        .logo-wrap {
+            order: -1;
+            width: 88px;
+            height: 88px;
+            border-radius: 20px;
+        }
+
+        .logo-wrap img {
+            width: 64px;
+            height: 64px;
+        }
+    }
+</style>

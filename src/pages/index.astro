@@ -18,28 +18,48 @@ import Footer from "../components/Footer.astro";
         <div class="section-header">
           <div>
             <p class="section-kicker">Selected work</p>
-            <h2 class="section-title">Projects that connect models and systems</h2>
+            <h2 class="section-title">
+              Software projects shaped by architecture, optimization, and complex problems.
+            </h2>
           </div>
 
           <a class="section-link" href="/projects">All projects →</a>
         </div>
 
-        <ProjectCard
-            title="Lift Nexus API"
-            href="https://lift-nexus.amine-bahij.dev/"
-            logo="images/logo-lift-nexus.png"
-            logoAlt="Lift Nexus API logo"
-            description="A Spring Boot backend MVP for warehouse dispatch optimization, exploring how solver-based planning can be integrated into APIs, persistence, tests, documentation, and CI-generated reports."
-            tags={[
-              "Spring Boot",
-              "Timefold",
-              "PostgreSQL",
-              "Flyway",
-              "Docker",
-              "CI/CD",
-              "Testing"
-            ]}
-        />
+        <div class="projects-list">
+          <ProjectCard
+              title="Lift Nexus API"
+              href="https://lift-nexus.amine-bahij.dev/"
+              logo="images/logo-lift-nexus.png"
+              logoAlt="Lift Nexus API logo"
+              description="A Spring Boot backend MVP for warehouse dispatch optimization, exploring how solver-based planning can be integrated into APIs, persistence, tests, documentation, and CI-generated reports."
+              tags={[
+                "Spring Boot",
+                "Timefold",
+                "PostgreSQL",
+                "Flyway",
+                "Docker",
+                "CI/CD",
+                "Testing"
+              ]}
+          />
+
+          <ProjectCard
+              title="BilevelPy"
+              href="https://institute-of-transport-logistics.github.io/bilevelpy/"
+              logo="images/bilevelpy_logo.png"
+              logoAlt="BilevelPy logo"
+              description="An extensible Python framework for building, solving, and evaluating Gurobi-based optimization models through reusable data, model, solver, and solution components."
+              tags={[
+                "Python",
+                "Gurobi",
+                "Software Architecture",
+                "Testing",
+                "CI/CD",
+                "Documentation"
+              ]}
+          />
+        </div>
       </div>
     </section>
 
@@ -74,6 +94,11 @@ import Footer from "../components/Footer.astro";
 <style>
   main {
     padding-bottom: 1rem;
+  }
+
+  .projects-list {
+    display: grid;
+    gap: 1rem;
   }
 
   .writing-section {
